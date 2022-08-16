@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_weather_app/model/weather.dart';
 import 'package:riverpod_weather_app/providers/providers.dart';
 import 'package:riverpod_weather_app/weather_notifier.dart';
-import 'package:provider/provider.dart';
 
 class WeatherSearchPage extends ConsumerWidget {
   const WeatherSearchPage({Key? key}) : super(key: key);
@@ -75,7 +74,8 @@ class CityInputField extends ConsumerWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 50),
       child: TextField(
-        onSubmitted: (value) => submitCityName(context, value),
+        onSubmitted: (value) =>
+            ref.read(weatherNotifierProvider.notifier).getWeather(value),
         textInputAction: TextInputAction.search,
         decoration: InputDecoration(
           hintText: "Enter a city",
@@ -84,9 +84,5 @@ class CityInputField extends ConsumerWidget {
         ),
       ),
     );
-  }
-
-  void submitCityName(BuildContext context, String cityName) {
-    context.read(weatherNotifierProvider.notifier).getWeather(cityName);
   }
 }

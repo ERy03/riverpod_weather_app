@@ -13,9 +13,9 @@ class FakeWeatherRepository implements WeatherRepository {
     return Future.delayed(const Duration(seconds: 1), () {
       final random = Random();
 
-      if (random.nextBool()) {
-        throw NetworkException();
-      }
+      // if (random.nextBool()) {
+      //   throw NetworkException();
+      // }
 
       cachedTempCelsius = 20 + random.nextInt(15) + random.nextDouble();
 
